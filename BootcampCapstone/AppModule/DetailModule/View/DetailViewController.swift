@@ -83,6 +83,10 @@ class DetailViewController: UIViewController {
 
         detailImageView.layer.cornerRadius = 10.0
 
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.navigationBar.isTranslucent = false
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -114,40 +118,35 @@ class DetailViewController: UIViewController {
             return
 
         }else{
-            for cartFood in foodsCartArray {
+            var itemFound = false
 
-                if cartFood.foodName == food?.foodName{
-                    let parameters2: [String: Any] = [
-                        "sepet_yemek_id": cartFood.cartFoodID,
-                        "kullanici_adi": USERNAME_CONSTANT
-                    ]
+            for cartFood in foodsCartArray {
+                if cartFood.foodName == food?.foodName {
+                    let parameters2: [String: Any] = ["sepet_yemek_id": cartFood.cartFoodID, "kullanici_adi": USERNAME_CONSTANT]
 
                     parameters3["yemek_siparis_adet"] =  String(describing: (stepperValue ?? 0) + (Int(cartFood.foodQuantity) ?? 0))
 
-                    print("yay1")
-
                     detailPresenterObject?.deleteFromFoodCart(parameters: parameters2) { success in
-                        print(success)
-
                         if success {
                             self.detailPresenterObject?.saveToFoodCart(parameters: parameters3)
                             self.detailPresenterObject?.getFromFoodCart(parameters: parameters)
-                            return
                         }
                     }
+
+                    itemFound = true
                     break
-
-                }else{
-                    print("yay2")
-                    detailPresenterObject?.saveToFoodCart(parameters: parameters3)
-                    detailPresenterObject?.getFromFoodCart(parameters: parameters)
-                    return
-
                 }
             }
 
+            if !itemFound {
+                detailPresenterObject?.saveToFoodCart(parameters: parameters3)
+                detailPresenterObject?.getFromFoodCart(parameters: parameters)
+            }
+
         }
-    }
+
+}
+
 
 
     @IBAction func stepperValueChanged(_ sender: UIStepper) {
@@ -163,6 +162,11 @@ class DetailViewController: UIViewController {
         detailAddToCartButton.isEnabled = false
 
         saveToCart()
+
+        let parameters: [String: Any] = [
+            "kullanici_adi": USERNAME_CONSTANT
+        ]
+        detailPresenterObject?.getFromFoodCart(parameters: parameters)
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.performSegue(withIdentifier: "fromDetailToCartVC", sender: self)
