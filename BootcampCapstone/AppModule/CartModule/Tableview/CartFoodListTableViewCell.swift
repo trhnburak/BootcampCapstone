@@ -20,7 +20,8 @@ class CartFoodListTableViewCell: UITableViewCell {
     @IBOutlet weak var cartStepper: UIStepper!
     @IBOutlet weak var deleteButton: UIButton!
     @IBOutlet weak var cartFoodCellBackView: UIView!
-
+    @IBOutlet weak var cartQuantityBackView: UIView!
+    
     weak var delegate: CartTableViewCellDelegate?
     
 
@@ -49,6 +50,10 @@ class CartFoodListTableViewCell: UITableViewCell {
         cartFoodCellBackView.backgroundColor = UIColor.clear
 
         cartImageView.layer.cornerRadius = 10.0
+
+        cartQuantityBackView.layer.cornerRadius = min(cartQuantityBackView.bounds.width, cartQuantityBackView.bounds.height) / 2
+        cartQuantityBackView.layer.masksToBounds = true
+
 
         
     }

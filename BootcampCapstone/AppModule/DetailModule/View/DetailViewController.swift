@@ -24,6 +24,8 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailCloseButton: UIButton!
     @IBOutlet weak var detailBackView: UIView!
+    
+    @IBOutlet weak var detailQuantityBackView: UIView!
     var detailPresenterObject:ViewToPresenterDetailProtocol?
 
     var food:Foods?
@@ -60,6 +62,10 @@ class DetailViewController: UIViewController {
 
         // Set corner radius
         detailBackView.layer.cornerRadius = 10.0
+
+        detailQuantityBackView.layer.cornerRadius = min(detailQuantityBackView.bounds.width, detailQuantityBackView.bounds.height) / 2
+        detailQuantityBackView.layer.masksToBounds = true
+
 
         // Set shadow properties
         let shadowLayer = CALayer()
