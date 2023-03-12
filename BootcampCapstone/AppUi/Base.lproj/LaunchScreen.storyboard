@@ -20,27 +20,24 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DfE-YM-BPT">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Food Order App" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4x-6Q-MrP">
-                                        <rect key="frame" x="94" y="438" width="226" height="44"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="u6n-5n-IXq">
+                                        <rect key="frame" x="107" y="348" width="200" height="200"/>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" name="red-1"/>
                                 <constraints>
-                                    <constraint firstItem="N4x-6Q-MrP" firstAttribute="centerY" secondItem="DfE-YM-BPT" secondAttribute="centerY" constant="12" id="ERj-nX-hIe"/>
-                                    <constraint firstItem="N4x-6Q-MrP" firstAttribute="centerX" secondItem="DfE-YM-BPT" secondAttribute="centerX" id="LC0-OR-G3k"/>
+                                    <constraint firstItem="u6n-5n-IXq" firstAttribute="centerX" secondItem="DfE-YM-BPT" secondAttribute="centerX" id="UPN-71-eCL"/>
+                                    <constraint firstItem="u6n-5n-IXq" firstAttribute="centerY" secondItem="DfE-YM-BPT" secondAttribute="centerY" id="v4X-j3-PC5"/>
                                 </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DfE-YM-BPT" secondAttribute="trailing" id="QNZ-FV-uD6"/>
-                            <constraint firstItem="DfE-YM-BPT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="-48" id="euv-Lr-vsP"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DfE-YM-BPT" secondAttribute="bottom" constant="-34" id="r53-WL-oGe"/>
-                            <constraint firstItem="DfE-YM-BPT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wRS-jQ-vuL"/>
+                            <constraint firstAttribute="trailing" secondItem="DfE-YM-BPT" secondAttribute="trailing" id="E9z-F4-KBu"/>
+                            <constraint firstItem="DfE-YM-BPT" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="dKF-Ij-nP5"/>
+                            <constraint firstAttribute="bottom" secondItem="DfE-YM-BPT" secondAttribute="bottom" id="gCW-1u-2hp"/>
+                            <constraint firstItem="DfE-YM-BPT" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="wkM-Id-GYs"/>
                         </constraints>
                     </view>
                 </viewController>
@@ -50,6 +47,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AppLogo" width="200" height="200"/>
         <namedColor name="red-1">
             <color red="0.91764705882352937" green="0.0" blue="0.29411764705882354" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

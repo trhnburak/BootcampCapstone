@@ -15,6 +15,8 @@
 		FFA2BD3429A932E5003A9432 /* DetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA2BD3329A932E5003A9432 /* DetailRouter.swift */; };
 		FFA2BD3629A932F4003A9432 /* DetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA2BD3529A932F4003A9432 /* DetailInteractor.swift */; };
 		FFA2BD3C29A941E9003A9432 /* FoodCart.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFA2BD3B29A941E9003A9432 /* FoodCart.swift */; };
+		FFBDC2E129B2737400081228 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = FFBDC2E029B2737400081228 /* Lottie */; };
+		FFEB4B7D29AFBBA000E10CF5 /* CartFoodListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FFEB4B7C29AFBBA000E10CF5 /* CartFoodListTableViewCell.xib */; };
 		FFF5B8EA29AAC5F600826D41 /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5B8E929AAC5F600826D41 /* CartViewController.swift */; };
 		FFF5B8EC29AAC60400826D41 /* CartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5B8EB29AAC60400826D41 /* CartPresenter.swift */; };
 		FFF5B8EE29AAC61500826D41 /* CartProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFF5B8ED29AAC61500826D41 /* CartProtocols.swift */; };
@@ -46,6 +48,7 @@
 		FFA2BD3329A932E5003A9432 /* DetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailRouter.swift; sourceTree = "<group>"; };
 		FFA2BD3529A932F4003A9432 /* DetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailInteractor.swift; sourceTree = "<group>"; };
 		FFA2BD3B29A941E9003A9432 /* FoodCart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCart.swift; sourceTree = "<group>"; };
+		FFEB4B7C29AFBBA000E10CF5 /* CartFoodListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CartFoodListTableViewCell.xib; sourceTree = "<group>"; };
 		FFF5B8E929AAC5F600826D41 /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		FFF5B8EB29AAC60400826D41 /* CartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPresenter.swift; sourceTree = "<group>"; };
 		FFF5B8ED29AAC61500826D41 /* CartProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartProtocols.swift; sourceTree = "<group>"; };
@@ -75,6 +78,7 @@
 			files = (
 				FFFB7E9729A6920B005E80AF /* Kingfisher in Frameworks */,
 				FFFB7E9429A691A6005E80AF /* Alamofire in Frameworks */,
+				FFBDC2E129B2737400081228 /* Lottie in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,6 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				FFF5B8F429AACD9200826D41 /* CartFoodListTableViewCell.swift */,
+				FFEB4B7C29AFBBA000E10CF5 /* CartFoodListTableViewCell.xib */,
 			);
 			path = Tableview;
 			sourceTree = "<group>";
@@ -374,6 +379,7 @@
 			packageProductDependencies = (
 				FFFB7E9329A691A6005E80AF /* Alamofire */,
 				FFFB7E9629A6920B005E80AF /* Kingfisher */,
+				FFBDC2E029B2737400081228 /* Lottie */,
 			);
 			productName = BootcampCapstone;
 			productReference = FFFB7E6729A533EC005E80AF /* BootcampCapstone.app */;
@@ -406,6 +412,7 @@
 			packageReferences = (
 				FFFB7E9229A691A6005E80AF /* XCRemoteSwiftPackageReference "Alamofire" */,
 				FFFB7E9529A6920B005E80AF /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				FFBDC2DF29B2737400081228 /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = FFFB7E6829A533EC005E80AF /* Products */;
 			projectDirPath = "";
@@ -423,6 +430,7 @@
 			files = (
 				FF948C4329AE1262003DF09A /* Main.storyboard in Resources */,
 				FFFB7E7729A533F1005E80AF /* LaunchScreen.storyboard in Resources */,
+				FFEB4B7D29AFBBA000E10CF5 /* CartFoodListTableViewCell.xib in Resources */,
 				FFFB7E7429A533F1005E80AF /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -666,6 +674,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		FFBDC2DF29B2737400081228 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		FFFB7E9229A691A6005E80AF /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -685,6 +701,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		FFBDC2E029B2737400081228 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = FFBDC2DF29B2737400081228 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
 		FFFB7E9329A691A6005E80AF /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = FFFB7E9229A691A6005E80AF /* XCRemoteSwiftPackageReference "Alamofire" */;

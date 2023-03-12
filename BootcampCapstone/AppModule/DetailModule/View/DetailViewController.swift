@@ -7,6 +7,7 @@
 
 import UIKit
 import Kingfisher
+import Lottie
 
 class DetailViewController: UIViewController {
 
@@ -23,9 +24,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var detailAddToCartButton: UIButton!
 
     @IBOutlet weak var detailCloseButton: UIButton!
-    @IBOutlet weak var detailBackView: UIView!
-    
+    @IBOutlet weak var goToCartButton: UIButton!
+    @IBOutlet weak var imageBackView: UIView!
     @IBOutlet weak var detailQuantityBackView: UIView!
+    
     var detailPresenterObject:ViewToPresenterDetailProtocol?
 
     var food:Foods?
@@ -37,13 +39,9 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
         DetailRouter.createModule(ref: self)
 
-
-
         let url = URL(string: API_GET_FOOD_IMAGE + (food?.foodImageName ?? ""))
-
 
         detailImageView.kf.setImage(with: url) { result in
             switch result {
@@ -56,36 +54,68 @@ class DetailViewController: UIViewController {
             }
         }
 
-        //Back View
-        detailBackView.layer.borderWidth = 1.0
-        detailBackView.layer.borderColor = UIColor.clear.cgColor
+        // detailCloseButton
+        detailCloseButton.layer.cornerRadius = min(detailCloseButton.bounds.width, detailCloseButton.bounds.height) / 2
+        detailCloseButton.layer.masksToBounds = true
 
-        // Set corner radius
-        detailBackView.layer.cornerRadius = 10.0
+        // goToCartButton
+        goToCartButton.layer.cornerRadius = min(goToCartButton.bounds.width, goToCartButton.bounds.height) / 2
+        goToCartButton.layer.masksToBounds = true
 
+        // detailAddToCartButton
+        detailAddToCartButton.layer.borderWidth = 2.0
+        detailAddToCartButton.layer.borderColor = UIColor(named: "red-1")?.cgColor
+        detailAddToCartButton.layer.cornerRadius = 0
+        detailAddToCartButton.layer.masksToBounds = true
+
+        // detailStepper
+        detailStepper.layer.cornerRadius = 8
+        detailStepper.layer.borderWidth = 1
+        detailStepper.layer.borderColor = UIColor.clear.cgColor
+        detailStepper.backgroundColor = UIColor.clear
+        detailStepper.tintColor = UIColor(named: "black-1")
+
+        let shadowLayer2 = CALayer()
+        shadowLayer2.frame = detailStepper.frame
+        shadowLayer2.cornerRadius = detailStepper.layer.cornerRadius
+        shadowLayer2.backgroundColor = UIColor.white.cgColor
+        shadowLayer2.shadowColor = UIColor.black.cgColor
+        shadowLayer2.shadowOffset = CGSize(width: 0, height: 0)
+        shadowLayer2.shadowOpacity = 0.5
+        shadowLayer2.shadowRadius = 3
+
+        detailStepper.superview?.layer.insertSublayer(shadowLayer2, below: detailStepper.layer)
+
+        // detailQuantityBackView
         detailQuantityBackView.layer.cornerRadius = min(detailQuantityBackView.bounds.width, detailQuantityBackView.bounds.height) / 2
         detailQuantityBackView.layer.masksToBounds = true
 
+        let shadowLayer3 = CALayer()
+        shadowLayer3.frame = detailQuantityBackView.frame
+        shadowLayer3.cornerRadius = detailQuantityBackView.layer.cornerRadius
+        shadowLayer3.backgroundColor = UIColor.white.cgColor
+        shadowLayer3.shadowColor = UIColor.black.cgColor
+        shadowLayer3.shadowOffset = CGSize(width: 0, height: 0)
+        shadowLayer3.shadowOpacity = 0.5
+        shadowLayer3.shadowRadius = 3
 
-        // Set shadow properties
+        detailQuantityBackView.superview?.layer.insertSublayer(shadowLayer3, below: detailQuantityBackView.layer)
+
+        // imageBackView
+        imageBackView.layer.cornerRadius = 70
+        imageBackView.layer.maskedCorners = [.layerMinXMaxYCorner]
+
         let shadowLayer = CALayer()
-        shadowLayer.frame = detailBackView.frame
-        shadowLayer.cornerRadius = detailBackView.layer.cornerRadius
+        shadowLayer.frame = imageBackView.frame
+        shadowLayer.cornerRadius = imageBackView.layer.cornerRadius
         shadowLayer.backgroundColor = UIColor.white.cgColor
         shadowLayer.shadowColor = UIColor.black.cgColor
-        shadowLayer.shadowOffset = CGSize(width: 0, height: 0)
+        shadowLayer.shadowOffset = CGSize(width: 50, height: 0)
         shadowLayer.shadowOpacity = 0.5
         shadowLayer.shadowRadius = 5
-        detailBackView.superview?.layer.insertSublayer(shadowLayer, below: detailBackView.layer)
+        shadowLayer.shadowPath = UIBezierPath(roundedRect: shadowLayer.bounds.insetBy(dx: -50, dy: 0), cornerRadius: imageBackView.layer.cornerRadius).cgPath
 
-        // Set background color to clear
-        detailBackView.backgroundColor = UIColor.clear
-
-        detailImageView.layer.cornerRadius = 10.0
-
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = false
+        imageBackView.superview?.layer.insertSublayer(shadowLayer, below: imageBackView.layer)
 
     }
 
@@ -168,9 +198,76 @@ class DetailViewController: UIViewController {
         ]
         detailPresenterObject?.getFromFoodCart(parameters: parameters)
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+
+        let alertController = UIAlertController(title: "Ürün Sepetinize Eklendi!", message: "", preferredStyle: .alert)
+
+        // Accessing alert view backgroundColor :
+        alertController.view.backgroundColor = UIColor.white
+        alertController.view.subviews.first?.subviews.first?.subviews.first?.backgroundColor = UIColor.white
+
+        // Accessing buttons tintcolor :
+        alertController.view.tintColor = UIColor(named: "red-1")
+
+        alertController.view.layer.cornerRadius = 10
+
+        // Increase the alert height
+        let heightConstraint = NSLayoutConstraint(item: alertController.view!,
+                                                  attribute: NSLayoutConstraint.Attribute.height,
+                                                  relatedBy: NSLayoutConstraint.Relation.equal,
+                                                  toItem: nil,
+                                                  attribute: NSLayoutConstraint.Attribute.notAnAttribute,
+                                                  multiplier: 1,
+                                                  constant: 300)
+
+        alertController.view.addConstraint(heightConstraint)
+
+        // width constraint
+        let widthtConstraint = NSLayoutConstraint(
+            item: alertController.view!,
+            attribute: NSLayoutConstraint.Attribute.width,
+            relatedBy: NSLayoutConstraint.Relation.equal,
+            toItem: nil,
+            attribute:
+                NSLayoutConstraint.Attribute.notAnAttribute,
+            multiplier: 1,
+            constant: self.view.frame.width * 0.9)
+        alertController.view.addConstraint(widthtConstraint)
+
+
+        // Create the Lottie animation view
+        let animationView = LottieAnimationView(name: "121871-add-to-cart-red-version")
+        animationView.loopMode = .loop
+        animationView.play()
+
+        // Add the animation view as a subview of the alert controller's view
+        alertController.view.addSubview(animationView)
+        animationView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            animationView.centerXAnchor.constraint(equalTo: alertController.view.centerXAnchor),
+            animationView.centerYAnchor.constraint(equalTo: alertController.view.centerYAnchor),
+            animationView.widthAnchor.constraint(equalToConstant: self.view.frame.width * 0.8),
+            animationView.heightAnchor.constraint(equalToConstant: 150),
+            
+        ])
+
+        // Set the title font and color
+        let titleFont = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .medium), NSAttributedString.Key.foregroundColor: UIColor(named: "black-1")]
+
+        let titleAttrString = NSMutableAttributedString(string: "Ürün Sepetinize Eklendi!", attributes: titleFont as [NSAttributedString.Key : Any])
+        alertController.setValue(titleAttrString, forKey: "attributedTitle")
+
+        let okAction = UIAlertAction(title: "Tamam", style: .default) { _ in
+            // handle OK button tapped
             self.performSegue(withIdentifier: "fromDetailToCartVC", sender: self)
         }
+
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+
+
+        //DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        //    self.performSegue(withIdentifier: "fromDetailToCartVC", sender: self)
+        //}
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             self.detailAddToCartButton.isEnabled = true
